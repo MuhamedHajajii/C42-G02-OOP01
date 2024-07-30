@@ -91,6 +91,86 @@ namespace Demo
         //}
         #endregion
 
+        #region 2- Enum
+        // I Can Make It Sart With The Value I want and i can make all of them start with any value and hold any value
+        public enum Days { Saturday = 1 ,Sunday,monday,tuesday,wedesday }
+        
+        public enum Grades : int  { A, B, C, D }
+
+
+
+        enum Gender : int
+        {
+            Male = 1, Female
+        }
+
+        public enum Roles { Admin = 10, Editor = 20 , Viewer = 30}
+
+        //public enum Branches : int { Dokki, NasrCity, Maadi, Alexandria, Smarvillage}
+        // Byte = 8 bits = 0 : 255 -- The Limit is the 255 i can not add more lables or predeifind constants more than 255 
+        public enum Branches : byte { Dokki = 200 , NasrCity, Maadi = 253, Alexandria, Smarvillage}
+
+        //public enum Permissions : int
+        //{
+        //    Delete,
+        //    Execute,
+        //    Read,
+        //    Write
+        //}
+
+        [Flags] // I should put this attribute there to make the clr recognize this is a decimal set
+        public enum Permissions : byte
+        {
+            Delete = 1,
+            Execute = 2,
+            Read = 4,
+            Write = 8
+        }
+
+        // The Gender Now Will Be Stored in the data base as numbers [integers] but i will deal with it in the application as the label
+        // if i have more than one label with the same value it will return the first value it will find
+        //class Employee 
+        //{
+        //    string Name;
+        //    int Age;
+        //    decimal Salary;
+        //    Gender Gender;
+        //    Roles Role;
+        //}
+
+
+        /** If i made array of boolean for each employee i will go and allocate 4 bytes for each employee
+         * 1 byte == 8 bits and the byte save 0 or 1
+         * if i want to give him the permission of write 1000
+         * if i want to give him the permission of read  0100
+         * if i want to give him the permission of write 0010
+         * if i want to give him the permission of Del   0001
+         * to convert it to decimal every column will be * 2
+         * 1 2 4 8 16 32 64 128
+         * 
+         * delete 1
+         * write 2
+         * execute 4 
+         * read 8
+         * delete write 3
+         * delete write execute 7
+         * delete write execute read 15
+         * if they are more than 8 you can use short so the bits will be more than those numbers
+         */
+
+        class Employee
+        {
+         public string Name;
+         public int Age;
+         public decimal Salary;
+         public Gender Gender;
+         public Permissions Permissions;
+         //public Permissions[] Permissions;
+         //public bool[] Permissions;
+        }
+
+        #endregion
+
         static void Main()
         {
             /* Before OOP */
@@ -115,7 +195,7 @@ namespace Demo
 
             #endregion
 
-            #region Access Modifiers
+            #region 2- Access Modifiers
             /** Access Modifiers is a c sharp keyword to indicate the accessibility scope
              * What is the access modifiers 
              * 1- Private
@@ -176,8 +256,164 @@ namespace Demo
 
             #endregion
 
+            #region 3- Enum
+
+            // Enum is a special data type that enables the variables to set [predefind constants] like days, gender
+            // Day now will store one of the constants i predefind them
+            //Days Day = Days.Sunday;
+
+            #region Ex01
+
+            //Grades X = Grades.A;
+            ////Console.WriteLine(X); // A
+
+            //if (X == Grades.A)
+            //{
+            //    Console.WriteLine(":)");
+            //} else
+            //{
+            //    Console.WriteLine(":(");
+            //}
+
+            //Grades Y = (Grades) 2; // Explicit Casting because the compiler can not Casting from int to Gender
+            //Console.WriteLine(Y);
+            //Grades Z = (Grades) 10; // Explicit Casting with a label not predefind in the constats within the enum Grade
+            //Console.WriteLine(Y);
+
+            #endregion
+
+            #region Ex02
+
+            //Console.WriteLine("Please Enter Your Grade: ");
+            //// The Type of Enum which i will convert the data from string to it
+            ////            3-Grades     <<     2-Object       <<     1-String
+            ////Grades X = (Grades)  Enum.Parse(typeof(Grades),Console.ReadLine()!);
+            ////Console.WriteLine($"Your Grade Is: {X}");
+            //// Not Safe Because if i recive any other value except the predefind constants i already defind will throw exception
+
+            ////                              2-Enum         <<    1-String        >>     3-Object
+            //bool Result =  Enum.TryParse(typeof(Grades), Console.ReadLine(), out object X);
+            //Console.WriteLine($"Your Grade Is: {X}");
+            //Console.WriteLine($"The Result is {Result}");
+
+
+            #endregion
+
+            #region Ex03
+
+            //Gender G1 = Gender.Female;
+            //Console.WriteLine(G1);
+
+            //Gender G2 = (Gender)2;
+            //Console.WriteLine(G2);
+
+            //string Gneder = "Male";
+            //string Gender = "male";
+            //// Gendre X = (Gender) Gneder; // Casting Operator Cannot convert from String to Gender
+
+            ////Enum.TryParse(typeof(Gender), Gneder, out object Result);
+            ////Console.WriteLine(Result);
+
+            //// Try Parse Generic
+
+            ////Enum.TryParse<Gender>(Gender, true, out Gender result);
+            //// The True To Avoid The Casesensitive for the lables of the enum
+            //// Ignore The Case
+            //Enum.TryParse(Gender, true, out Gender result);
+            //Console.WriteLine(result);
+
+            // The Defult Value of the enum is zero 
+
+            //Gender X = new Gender();
+            //// New Here Not Create The Object 
+            //// its only create the defult value 
+            //// The defult value is assigned by the construtctor function
+            //// if i start my values with the zero i will not now if the parse is success or not 
+            //Console.WriteLine(X);
+
+            // The Enum Lables Is Case Sensitive
+
+            #endregion
+
+            #region Ex04
+            //// Permissions
+            //// PreDefined Values so i will store it inside enum
+
+            //Employee employee = new Employee();
+            //employee.Name = "Haji";
+            //employee.Age = 25;
+            //employee.Gender = Gender.Male;
+            //employee.Permissions = (Permissions) 3;
+            ////employee.Permissions[0] = Permissions.Delete;
+            ////employee.Permissions[1] = Permissions.Delete;
+
+            //Console.WriteLine(employee.Permissions); // Delete, Execute
+
+            //// If You Want To Add New Permission For This Employee
+            //// Do XOR
+            //// Add The Read Permission
+            //employee.Permissions = Permissions.Read ^ employee.Permissions;
+            //Console.WriteLine(employee.Permissions); // Delete, Execute, Read
+
+            ///** XOR Will Works on the Bits
+            // * 3*4 binary number
+            // * 0011 Delete, Execute
+            // * 0100 Read
+            // * 0111 Delete, Execute, Read
+            // * when find matching will return zero
+            // */
+            //employee.Permissions = Permissions.Read ^ employee.Permissions;
+            //Console.WriteLine(employee.Permissions); // Delete, Execute
+
+            //// if you want to deny the permission do the xor again 
+            ///** XOR Will Works on the Bits
+            // * 3*4 binary number
+            // * 0111 Delete, Execute, Read
+            // * 0100 Read
+            // * 0011 Delete, Execute
+            // * when find matching will return zero
+            // */
+
+            //// & Can Check If You Want To Check If Delete Permission Do & Operation
+            //// Permissions.Delete & employee.Permissions == Delete or random Number
+            //if((Permissions.Delete & employee.Permissions) == Permissions.Delete)
+            //{
+            //    Console.WriteLine("Delete Already Exist");
+            //} else
+            //{
+            //    employee.Permissions = Permissions.Delete & employee.Permissions;
+            //}
+            //Console.WriteLine(employee.Permissions); // Delete, Execute
+
+            ///** And Will Works on the Bits
+            // * 3*4 binary number
+            // * 0011 Delete, Execute
+            // * 0001 Delete
+            // * 0001 Delete
+            // * when find the both 1
+            // */
+
+            //// So To Add It Or Delete permission just use the xor , to check before add just use & to make the both operation use the |
+
+            //// If you want to check if permission is already exist will not do any thing but if it already not existed will add it 
+            //employee.Permissions = Permissions.Delete | employee.Permissions;
+            //Console.WriteLine(employee.Permissions); // Delete, Execute
+
+            ///** OR Will Works on the Bits
+            // * 3*4 binary number
+            // * 0011 Delete, Execute
+            // * 0001 Delete
+            // * 0011 Delete, Execute
+            // * will return if one of them equal 1
+            // */
+
+            #endregion
+
+            #endregion
 
         }
+
+
 
 
     }
