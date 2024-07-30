@@ -92,82 +92,82 @@ namespace Demo
         #endregion
 
         #region 2- Enum
-        // I Can Make It Sart With The Value I want and i can make all of them start with any value and hold any value
-        public enum Days { Saturday = 1 ,Sunday,monday,tuesday,wedesday }
+        //// I Can Make It Sart With The Value I want and i can make all of them start with any value and hold any value
+        //public enum Days { Saturday = 1 ,Sunday,monday,tuesday,wedesday }
         
-        public enum Grades : int  { A, B, C, D }
+        //public enum Grades : int  { A, B, C, D }
 
 
 
-        enum Gender : int
-        {
-            Male = 1, Female
-        }
-
-        public enum Roles { Admin = 10, Editor = 20 , Viewer = 30}
-
-        //public enum Branches : int { Dokki, NasrCity, Maadi, Alexandria, Smarvillage}
-        // Byte = 8 bits = 0 : 255 -- The Limit is the 255 i can not add more lables or predeifind constants more than 255 
-        public enum Branches : byte { Dokki = 200 , NasrCity, Maadi = 253, Alexandria, Smarvillage}
-
-        //public enum Permissions : int
+        //enum Gender : int
         //{
-        //    Delete,
-        //    Execute,
-        //    Read,
-        //    Write
+        //    Male = 1, Female
         //}
 
-        [Flags] // I should put this attribute there to make the clr recognize this is a decimal set
-        public enum Permissions : byte
-        {
-            Delete = 1,
-            Execute = 2,
-            Read = 4,
-            Write = 8
-        }
+        //public enum Roles { Admin = 10, Editor = 20 , Viewer = 30}
 
-        // The Gender Now Will Be Stored in the data base as numbers [integers] but i will deal with it in the application as the label
-        // if i have more than one label with the same value it will return the first value it will find
-        //class Employee 
+        ////public enum Branches : int { Dokki, NasrCity, Maadi, Alexandria, Smarvillage}
+        //// Byte = 8 bits = 0 : 255 -- The Limit is the 255 i can not add more lables or predeifind constants more than 255 
+        //public enum Branches : byte { Dokki = 200 , NasrCity, Maadi = 253, Alexandria, Smarvillage}
+
+        ////public enum Permissions : int
+        ////{
+        ////    Delete,
+        ////    Execute,
+        ////    Read,
+        ////    Write
+        ////}
+
+        //[Flags] // I should put this attribute there to make the clr recognize this is a decimal set
+        //public enum Permissions : byte
         //{
-        //    string Name;
-        //    int Age;
-        //    decimal Salary;
-        //    Gender Gender;
-        //    Roles Role;
+        //    Delete = 1,
+        //    Execute = 2,
+        //    Read = 4,
+        //    Write = 8
         //}
 
+        //// The Gender Now Will Be Stored in the data base as numbers [integers] but i will deal with it in the application as the label
+        //// if i have more than one label with the same value it will return the first value it will find
+        ////class Employee 
+        ////{
+        ////    string Name;
+        ////    int Age;
+        ////    decimal Salary;
+        ////    Gender Gender;
+        ////    Roles Role;
+        ////}
 
-        /** If i made array of boolean for each employee i will go and allocate 4 bytes for each employee
-         * 1 byte == 8 bits and the byte save 0 or 1
-         * if i want to give him the permission of write 1000
-         * if i want to give him the permission of read  0100
-         * if i want to give him the permission of write 0010
-         * if i want to give him the permission of Del   0001
-         * to convert it to decimal every column will be * 2
-         * 1 2 4 8 16 32 64 128
-         * 
-         * delete 1
-         * write 2
-         * execute 4 
-         * read 8
-         * delete write 3
-         * delete write execute 7
-         * delete write execute read 15
-         * if they are more than 8 you can use short so the bits will be more than those numbers
-         */
 
-        class Employee
-        {
-         public string Name;
-         public int Age;
-         public decimal Salary;
-         public Gender Gender;
-         public Permissions Permissions;
-         //public Permissions[] Permissions;
-         //public bool[] Permissions;
-        }
+        ///** If i made array of boolean for each employee i will go and allocate 4 bytes for each employee
+        // * 1 byte == 8 bits and the byte save 0 or 1
+        // * if i want to give him the permission of write 1000
+        // * if i want to give him the permission of read  0100
+        // * if i want to give him the permission of write 0010
+        // * if i want to give him the permission of Del   0001
+        // * to convert it to decimal every column will be * 2
+        // * 1 2 4 8 16 32 64 128
+        // * 
+        // * delete 1
+        // * write 2
+        // * execute 4 
+        // * read 8
+        // * delete write 3
+        // * delete write execute 7
+        // * delete write execute read 15
+        // * if they are more than 8 you can use short so the bits will be more than those numbers
+        // */
+
+        //class Employee
+        //{
+        // public string Name;
+        // public int Age;
+        // public decimal Salary;
+        // public Gender Gender;
+        // public Permissions Permissions;
+        // //public Permissions[] Permissions;
+        // //public bool[] Permissions;
+        //}
 
         #endregion
 
@@ -411,6 +411,33 @@ namespace Demo
 
             #endregion
 
+            #region 4- Struct
+            // Struct Stands for structure
+            // its already existed since the functional programming paradigm
+            // The Difference We know till now is the struct is value type and the class is reference type
+            // the class support the inheritance and the struct not
+
+            //Point p1;
+            // The New Here Is Responsible only to choose which constructor you will use 
+            // Declare for varibale from type point 
+            // allocate the required bytes in the stack 8 bytes
+            // The 8 bytes is still initialized yet
+            //p1.x = 10; p1.y = 20;
+            //p1 = new Point(10,20);
+            //Console.WriteLine(p1.x);
+            //Console.WriteLine(p1.y);
+            //p1 = new Point(10);
+            //Console.WriteLine(p1.x);
+            //Console.WriteLine(p1.y);
+            //Console.WriteLine(p1); // base object // Boxing
+            //Console.WriteLine(p1.ToString()); // base string
+            /** It will allocate two places in the stack with 8 bytes
+             * This works only in the stack
+             * 
+             */
+
+
+            #endregion
         }
 
 
